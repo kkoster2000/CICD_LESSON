@@ -17,11 +17,6 @@ jobs:
         with:
           python-version: '3.11.x'
 
-      - name: Show Python & pip versions
-        run: |
-          python --version
-          pip --version
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -30,11 +25,12 @@ jobs:
       - name: Create junit directory
         run: mkdir -p junit
 
-      - name: Run tests with coverage
+      - name: Run tests
         run: |
-          pytest my_package/tests \
+          pytest .github/workflows/my_package/tests \
             --doctest-modules \
             --junitxml=junit/test-results.xml \
-            --cov=my_package \
+            --cov=.github/workflows/my_package \
             --cov-report=xml \
             --cov-report=html
+
